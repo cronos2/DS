@@ -2,15 +2,16 @@
 #define VMAXSTACK_H
 
 #include <Vector.h>
+#include <Pair.h>
 
 using namespace std;
 
 
-typename <class T> class VMaxStack {
+template <class T> class VMaxStack {
     
     private:
 
-        Vector vector;
+        Vector < Pair <T> > vector;
 
     public:
 

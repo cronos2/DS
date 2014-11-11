@@ -13,13 +13,13 @@ using namespace std;
   */
   
 
-typename <class T> class Vector {
+template <class T> class Vector {
 
     private:
 
         static const int BASE_CAPACITY = 20;
 
-        int size, capacity;
+        int _size, capacity;
 
         T* array;
 

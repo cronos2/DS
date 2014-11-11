@@ -1,13 +1,13 @@
 #include <iostream>
 
-#include <LMaxStack.h>
+#include <VMaxStack.h>
 
 using namespace std;
 
 
 int main(){
 
-    LMaxStack <int> stack;
+    VMaxStack <int> stack;
 
     for(int i = 0; i < 5; i++){
 

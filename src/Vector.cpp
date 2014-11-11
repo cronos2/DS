@@ -1,3 +1,8 @@
+#ifndef VECTOR_CPP
+#define VECTOR_CPP
+
+#include <stddef.h>
+
 #include <Vector.h>
 
 using namespace std;
@@ -6,7 +11,7 @@ using namespace std;
 /* PRIVATE */
 
 
-typename <class T> void Vector::copy(T* from, T* to){
+template <class T> void Vector <T>::copy(T* from, T* to){
 
     int delta = to - from;
 
@@ -22,20 +27,20 @@ typename <class T> void Vector::copy(T* from, T* to){
 
     }
 
-    this->size = delta;
+    this->_size = delta;
 
 }
 
 
-typename <class T> void Vector::resize(int space){
+template <class T> void Vector <T>::resize(int space){
 
-    T* new_array = new T(space);
+    T* new_array = new T[space];
 
-    int limit = min(this->size, space);
+    int limit = min(this->_size, space);
 
     for(int i = 0; i < limit; i++){
 
-        new_array = this->array[i];
+        new_array[i] = this->array[i];
 
     }
 
@@ -45,17 +50,17 @@ typename <class T> void Vector::resize(int space){
 
     this->capacity = space;
 
-    this->size = limit;
+    this->_size = limit;
 
 }
 
 
-typename <class T> void Vector::clear(){
+template <class T> void Vector <T>::clear(){
 
     delete[] this->array;
 
     this->array = NULL;
-    this->size = 0;
+    this->_size = 0;
     this->capacity = 0;
 
 }
@@ -64,17 +69,17 @@ typename <class T> void Vector::clear(){
 /* PUBLIC */
 
 
-typename <class T> Vector::Vector(){
+template <class T> Vector <T>::Vector(){
 
-    this->size = 0;
-    this->capacity = Vector::BASE_CAPACITY;
+    this->_size = 0;
+    this->capacity = Vector <T>::BASE_CAPACITY;
 
-    this->array = NULL;
+    this->array = new T[this->capacity];
 
 }
 
 
-typename <class T> Vector::Vector(T* array, int size){
+template <class T> Vector <T>::Vector(T* array, int size){
 
     this->array = new T(2 * size);
     this->capacity = 2 * size;
@@ -84,22 +89,22 @@ typename <class T> Vector::Vector(T* array, int size){
 }
 
 
-typename <class T> Vector::Vector(const Vector <T> &other){
+template <class T> Vector <T>::Vector(const Vector <T> &other){
 
     T* from = other.array;
 
-    this->copy(from, from + other.size);
+    this->copy(from, from + other._size);
 
 }
 
 
-typename <class T> Vector <T>& Vector::operator=(const Vector <T> &other){
+template <class T> Vector <T>& Vector <T>::operator=(const Vector <T> &other){
 
     if(this != &other){
 
         T* from = other.array;
 
-        this->copy(from, from + other.size);
+        this->copy(from, from + other._size);
 
     }
 
@@ -108,72 +113,74 @@ typename <class T> Vector <T>& Vector::operator=(const Vector <T> &other){
 }
 
 
-typename <class T> Vector::~Vector(){
+template <class T> Vector <T>::~Vector(){
 
     this->clear();
 
 }
 
 
-typename <class T> int Vector::size(){
+template <class T> int Vector <T>::size(){
 
-    return this->size;
-
-}
-
-
-typename <class T> bool Vector::empty(){
-
-    return this->size == 0;
+    return this->_size;
 
 }
 
 
-typename <class T> T& Vector::operator[](int index){
+template <class T> bool Vector <T>::empty(){
+
+    return this->_size == 0;
+
+}
+
+
+template <class T> T& Vector <T>::operator[](int index){
 
     return this->array[index];
 
 }
 
 
-typename <class T> const T& Vector::operator[](int index) const {
+template <class T> const T& Vector <T>::operator[](int index) const {
 
     return this->array[index];
 
 }
 
 
-typename <class T> T& Vector::front(){
+template <class T> T& Vector <T>::front(){
 
     return this->array[0];
 
 }
 
 
-typename <class T> T& Vector::back(){
+template <class T> T& Vector <T>::back(){
 
-    return this->array[this->size - 1];
+    return this->array[this->_size - 1];
 
 }
 
 
-typename <class T> void Vector::push_back(const T& value){
+template <class T> void Vector <T>::push_back(const T& value){
 
-    if(this->size == this->capacity){
+    if(this->_size == this->capacity){
 
         this->resize(2 * this->capacity);
 
     }
 
-    this->array[this->size] = value;
+    this->array[this->_size] = value;
 
-    this->size++;
+    this->_size++;
+
+}
+
+
+template <class T> T& Vector <T>::pop_back(){
+
+    return this->array[--this->_size];
 
 }
 
-
-typename <class T> T& Vector::pop_back(){
-
-    return this->array[--this->size];
-
-}
+#endif
