@@ -126,7 +126,7 @@ template <class T> class List {
           *
           */
 
-        bool empty(){
+        bool empty() const {
 
           return this->head == NULL;
 

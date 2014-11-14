@@ -1,7 +1,7 @@
-#ifndef LMAXSTACK_H
-#define LMAXSTACK_H
+#ifndef QMAXSTACK_H
+#define QMAXSTACK_H
 
-#include <List.h>
+#include <Queue.h>
 #include <Pair.h>
 
 using namespace std;
@@ -9,27 +9,29 @@ using namespace std;
 
 /**
   *
-  * @brief TDA LMaxStack
-  *     TDA Stack implementado mediante el TDA List
+  * @brief TDA QMaxStack
+  *         TDA Stack implementado mediante el TDA Queue
   * @section Función de abstracción: un LMaxStack representa una pila
   *
   */
+    
 
-template <class T> class LMaxStack {
+
+template <class T> class QMaxStack {
     
     private:
 
-        List < Pair <T> > list;
+        Queue < Pair <T> > Q1, Q2;
 
     public:
 
         /**
           *
-          * @brief Constructor vacío de la clase
+          * @brief Constructor por defecto de la clase
           *
           */
 
-        LMaxStack();
+        QMaxStack();
 
         /**
           *
@@ -39,40 +41,12 @@ template <class T> class LMaxStack {
           *
           */
 
-        LMaxStack(const T &value);
+        QMaxStack(const T &value);
 
         /**
           *
-          * @brief Constructor de copia de la clase
-          * @param other instancia de la clase que queremos copiar
-          * @return Una copia profunda de other
-          *
-          */
-
-        // LMaxStack(const LMaxStack &other);
-
-        /**
-          *
-          * @brief Operador de asignación de la clase
-          * @param other instancia de la clase a la que queremos asignar this
-          * @return *this
-          *
-          */
-
-        // List <T>& operator=(const LMaxStack &other);
-
-        /**
-          *
-          * @brief Destructor de la clase
-          *
-          */
-
-        // ~LMaxStack();
-
-        /**
-          *
-          * @pre El tipo T debe tener sobrecargado el operador <
           * @brief Añade un elemento a la pila
+          * @pre El tipo T debe tener sobrecargado el operador <
           * @param value valor que vamos a añadir
           *
           */
@@ -97,12 +71,12 @@ template <class T> class LMaxStack {
           *
           */
 
-        T getMax() const;
+        T getMax();
 
         bool empty() const;
 
 };
 
-#include <LMaxStack.cpp>
+#include <QMaxStack.cpp>
 
 #endif

@@ -120,14 +120,14 @@ template <class T> Vector <T>::~Vector(){
 }
 
 
-template <class T> int Vector <T>::size(){
+template <class T> int Vector <T>::size() const {
 
     return this->_size;
 
 }
 
 
-template <class T> bool Vector <T>::empty(){
+template <class T> bool Vector <T>::empty() const {
 
     return this->_size == 0;
 
@@ -148,14 +148,14 @@ template <class T> const T& Vector <T>::operator[](int index) const {
 }
 
 
-template <class T> T& Vector <T>::front(){
+template <class T> T& Vector <T>::front() const {
 
     return this->array[0];
 
 }
 
 
-template <class T> T& Vector <T>::back(){
+template <class T> T& Vector <T>::back() const {
 
     return this->array[this->_size - 1];
 

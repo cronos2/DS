@@ -27,16 +27,11 @@ template <class T> List <T>::List(T value){
 
 template <class T> List <T>::List(const List <T> &other){
     
-    Node <T> *curr_other = other.getHead(), *next_other = curr_other->getNext(),
-            *prev_here, *curr_here;
-
-    // curr_here = new Node(next_other->getValue());
+    Node <T> *curr_other = other.getHead(), *prev_here, *curr_here;
 
     prev_here = new Node <T>(curr_other->getValue());
 
     this->head = prev_here;
-
-    // prev_here = curr_here;
 
     curr_other = curr_other->getNext();
 
@@ -44,15 +39,15 @@ template <class T> List <T>::List(const List <T> &other){
 
         curr_here = new Node <T>(curr_other->getValue());
 
-        prev_here.setNext(curr_here);
+        prev_here->setNext(curr_here);
 
         prev_here = curr_here;
 
-        curr_other = next_other;
+        curr_other = curr_other->getNext();
 
     }
 
-    curr_here.setNext(NULL);
+    curr_here->setNext(NULL);
 
 }
 
@@ -61,12 +56,14 @@ template <class T> List <T>& List <T>::operator=(const List <T> &other){
     
     if(this != &other){
 
-        Node <T> *curr_here = this->head, *curr_other = other.getHead();
+        Node <T> *curr_here = this->head, *curr_other = other.getHead(), 
+                *prev_here;
 
         while(curr_here != NULL and curr_other != NULL){
 
             curr_here->setValue(curr_other->getValue());
 
+            prev_here = curr_here;
             curr_here = curr_here->getNext();
             curr_other = curr_other->getNext();
 
@@ -75,6 +72,8 @@ template <class T> List <T>& List <T>::operator=(const List <T> &other){
         if(curr_here == NULL and curr_other != NULL){  // not enough space
 
             Node <T> *new_node;
+
+            curr_here = prev_here;
 
             while(curr_other != NULL){
 

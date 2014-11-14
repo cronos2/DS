@@ -16,7 +16,7 @@ template <class T> LMaxStack <T>::LMaxStack(){
 }
 
 
-template <class T> LMaxStack <T>::LMaxStack(T value){
+template <class T> LMaxStack <T>::LMaxStack(const T &value){
 
     Pair <T> pair(value, value);
 
@@ -26,26 +26,17 @@ template <class T> LMaxStack <T>::LMaxStack(T value){
 
 }
 
-template <class T> void LMaxStack <T>::push(T value){
-    
-    T curr_max;
 
-    if(not this->list.empty()){
-        
-        T prev_max = this->list.getHead()->getValue().snd();
-        curr_max = prev_max < value ? value : prev_max;
-    
-    } else {
+template <class T> void LMaxStack <T>::push(const T &value){
 
-        curr_max = value;
+    T curr_max = this->empty() ? value : this->getMax();
 
-    }
-
-    Pair <T> pair(value, curr_max);
+    Pair <T> pair(value, curr_max < value ? value : curr_max);
 
     this->list.unshift(pair); 
 
 }
+
 
 template <class T> T LMaxStack <T>::pop(){
     
@@ -53,10 +44,19 @@ template <class T> T LMaxStack <T>::pop(){
 
 }
 
-template <class T> T LMaxStack <T>::getMax(){
+
+template <class T> T LMaxStack <T>::getMax() const {
     
-    return this->list.getHead().snd(); 
+    return this->list.getHead()->getValue().snd(); 
 
 }
+
+
+template <class T> bool LMaxStack <T>::empty() const {
+    
+    return this->list.empty();
+
+}
+
 
 #endif

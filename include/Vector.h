@@ -106,7 +106,7 @@ template <class T> class Vector {
           *
           */
 
-        int size();
+        int size() const ;
 
         /**
           *
@@ -115,7 +115,7 @@ template <class T> class Vector {
           *
           */
 
-        bool empty();
+        bool empty() const ;
 
         /**
           *
@@ -137,7 +137,7 @@ template <class T> class Vector {
           *
           */
 
-        T& front();
+        T& front() const ;
 
         /**
           *
@@ -147,7 +147,7 @@ template <class T> class Vector {
           *
           */
 
-        T& back();
+        T& back() const ;
 
         /**
           *
