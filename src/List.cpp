@@ -9,6 +9,29 @@
 using namespace std;
 
 
+/* PRIVATE */
+
+
+template <class T> void List <T>::clear(Node <T> *from = NULL){
+    
+    Node <T> *curr = from ? from : this->head, *next;
+
+    while(curr != NULL){
+
+        next = curr->getNext();
+
+        delete curr;
+
+        curr = next;
+
+    }
+
+}
+
+
+/* PUBLIC */
+
+
 template <class T> List <T>::List(){
     
     this->head = NULL;
@@ -57,7 +80,7 @@ template <class T> List <T>& List <T>::operator=(const List <T> &other){
     if(this != &other){
 
         Node <T> *curr_here = this->head, *curr_other = other.getHead(), 
-                *prev_here;
+                *prev_here = NULL;
 
         while(curr_here != NULL and curr_other != NULL){
 
@@ -73,7 +96,18 @@ template <class T> List <T>& List <T>::operator=(const List <T> &other){
 
             Node <T> *new_node;
 
-            curr_here = prev_here;
+            if(this->empty()){
+
+                this->push(curr_other->getValue());
+
+                curr_other = curr_other->getNext();
+                curr_here = this->head;
+
+            } else {
+
+                curr_here = prev_here;
+                
+            }
 
             while(curr_other != NULL){
 
@@ -87,19 +121,11 @@ template <class T> List <T>& List <T>::operator=(const List <T> &other){
 
             }
 
-        } else if(curr_here != NULL and curr_other == NULL){ // remove remaining
+        } else if(curr_here != NULL and curr_other == NULL){
 
-            Node <T> *curr_aux;
+            prev_here ? prev_here->setNext(NULL) : void();
 
-            while(curr_here != NULL){
-
-                curr_aux = curr_here->getNext();
-
-                delete curr_here;
-
-                curr_here = curr_aux;
-
-            }
+            this->clear(curr_here);  // remove remaining elements
 
         }
 
@@ -112,17 +138,7 @@ template <class T> List <T>& List <T>::operator=(const List <T> &other){
 
 template <class T> List <T>::~List(){
     
-    Node <T> *curr = this->head, *next;
-
-    while(curr != NULL){
-
-        next = curr->getNext();
-
-        delete curr;
-
-        curr = next;
-
-    }
+    this->clear();
 
 }
 

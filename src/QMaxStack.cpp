@@ -30,7 +30,7 @@ template <class T> void QMaxStack <T>::push(const T &value){
 
     T curr_max = this->empty() ? value : this->getMax();
 
-    Pair <T> pair(value, curr_max < value ? curr_max : value);
+    Pair <T> pair(value, curr_max < value ? value : curr_max);
 
     this->Q1.push_back(pair);
 
@@ -67,11 +67,26 @@ template <class T> T QMaxStack <T>::pop(){
 
 template <class T> T QMaxStack <T>::getMax(){
     
-    Pair <T> pair = this->pop();
+    Pair <T> pair;
 
-    this->push(pair);
+    while(true){
 
-    return pair.snd();
+        pair = this->Q1.pop_front();
+
+        this->Q2.push_back(pair);
+
+        if(this->Q1.empty()){
+
+            Queue < Pair <T> > new_queue;
+            
+            this->Q1 = this->Q2;
+            this->Q2 = new_queue;
+
+            return pair.snd();
+
+        }
+
+    }
 
 }
 

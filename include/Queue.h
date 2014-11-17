@@ -21,6 +21,8 @@ template <class T> class Queue {
 
         Node <T> *head, *end;
 
+        void clear(Node <T> *from);
+
     public:
 
         /**
@@ -86,7 +88,7 @@ template <class T> class Queue {
           *
           */
 
-        T& pop_front();
+        T pop_front();
 
         /**
           *
@@ -106,7 +108,7 @@ template <class T> class Queue {
           *
           */
 
-        bool empty();
+        bool empty() const;
                   
                     
 };

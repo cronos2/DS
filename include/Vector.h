@@ -165,7 +165,7 @@ template <class T> class Vector {
           *
           */
 
-        T& pop_back();
+        T pop_back();
 
 };
 

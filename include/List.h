@@ -21,6 +21,8 @@ template <class T> class List {
 
         Node <T> *head;
 
+        void clear(Node <T> *from);
+
     public:
 
         /**

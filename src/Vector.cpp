@@ -47,9 +47,7 @@ template <class T> void Vector <T>::resize(int space){
     this->clear();
 
     this->array = new_array;
-
     this->capacity = space;
-
     this->_size = limit;
 
 }
@@ -92,6 +90,8 @@ template <class T> Vector <T>::Vector(T* array, int size){
 template <class T> Vector <T>::Vector(const Vector <T> &other){
 
     T* from = other.array;
+
+    this->array = new T[other._size];
 
     this->copy(from, from + other._size);
 
@@ -177,7 +177,7 @@ template <class T> void Vector <T>::push_back(const T& value){
 }
 
 
-template <class T> T& Vector <T>::pop_back(){
+template <class T> T Vector <T>::pop_back(){
 
     return this->array[--this->_size];
 

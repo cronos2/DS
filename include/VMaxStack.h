@@ -69,7 +69,14 @@ template <class T> class VMaxStack {
           *
           */
 
-        T getMax() const;       
+        T getMax() const;
+
+        /**
+          *
+          * @brief Comprueba si la pila está vacía
+          * @return true si está vacía, false si no
+          *
+          */       
 
         bool empty() const;
 

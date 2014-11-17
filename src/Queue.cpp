@@ -9,6 +9,31 @@
 using namespace std;
 
 
+/* PRIVATE */
+
+
+template <class T> void Queue <T>::clear(Node <T> *from = NULL){
+    
+    Node <T> *curr = from ? from : this->head, *next;
+
+    while(curr != NULL){
+
+        next = curr->getNext();
+
+        delete curr;
+
+        curr = next;
+
+    }
+
+    this->head = this->end = NULL;
+
+}
+
+
+/* PUBLIC */
+
+
 template <class T> Queue <T>::Queue(){
     
     this->head = this->end = NULL;
@@ -27,29 +52,37 @@ template <class T> Queue <T>::Queue(const T &value){
 
 template <class T> Queue <T>::Queue(const Queue <T> &other){
     
-    Node <T> *curr_other = other.head, *prev_here, *curr_here;
+    if(other.empty()){
 
-    prev_here = new Node <T>(curr_other->getValue());
+        this->head = this->end = NULL;
 
-    this->head = prev_here;
+    } else {
 
-    curr_other = curr_other->getNext();
+        Node <T> *curr_other = other.head, *prev_here, *curr_here;
 
-    while(curr_other != NULL){
+        prev_here = new Node <T>(curr_other->getValue());
 
-        curr_here = new Node <T>(curr_other->getValue());
-
-        prev_here.setNext(curr_here);
-
-        prev_here = curr_here;
+        this->head = prev_here;
 
         curr_other = curr_other->getNext();
 
+        while(curr_other != NULL){
+
+            curr_here = new Node <T>(curr_other->getValue());
+
+            prev_here->setNext(curr_here);
+
+            prev_here = curr_here;
+
+            curr_other = curr_other->getNext();
+
+        }
+
+        curr_here->setNext(NULL);
+
+        this->end = curr_here;
+
     }
-
-    curr_here.setNext(NULL);
-
-    this->end = curr_here;
 
 }
 
@@ -58,12 +91,14 @@ template <class T> Queue <T>& Queue <T>::operator=(const Queue <T> &other){
     
     if(this != &other){
 
-        Node <T> *curr_here = this->head, *curr_other = other.head;
+        Node <T> *curr_here = this->head, *curr_other = other.head,
+                *prev_here = NULL;
 
         while(curr_here != NULL and curr_other != NULL){
 
             curr_here->setValue(curr_other->getValue());
 
+            prev_here = curr_here;
             curr_here = curr_here->getNext();
             curr_other = curr_other->getNext();
 
@@ -72,6 +107,19 @@ template <class T> Queue <T>& Queue <T>::operator=(const Queue <T> &other){
         if(curr_here == NULL and curr_other != NULL){  // not enough space
 
             Node <T> *new_node;
+
+            if(this->empty()){
+
+                this->push_back(curr_other->getValue());
+
+                curr_other = curr_other->getNext();
+                curr_here = this->head;
+
+            } else {
+
+                curr_here = prev_here;
+                
+            }
 
             while(curr_other != NULL){
 
@@ -85,19 +133,14 @@ template <class T> Queue <T>& Queue <T>::operator=(const Queue <T> &other){
 
             }
 
+            this->end = curr_here;
+
         } else if(curr_here != NULL and curr_other == NULL){ // remove remaining
 
-            Node <T> *curr_aux;
+            prev_here ? prev_here->setNext(NULL) : void();
+            this->end = prev_here;
 
-            while(curr_here != NULL){
-
-                curr_aux = curr_here->getNext();
-
-                delete curr_here;
-
-                curr_here = curr_aux;
-
-            }
+            this->clear(curr_here);
 
         }
 
@@ -110,24 +153,14 @@ template <class T> Queue <T>& Queue <T>::operator=(const Queue <T> &other){
 
 template <class T> Queue <T>::~Queue(){
     
-    Node <T> *curr = this->head, *aux;
-
-    while(curr != NULL){
-
-        aux = curr->getNext();
-
-        delete curr;
-
-        curr = aux;
-
-    }
+    this->clear();
 
 }
 
 
 template <class T> void Queue <T>::push_back(const T &value){
     
-    Node <T> *new_node = new Node <T>(value);
+    Node <T> *new_node = new Node <T>(value, NULL);
 
     if(not this->empty()){
 
@@ -144,7 +177,7 @@ template <class T> void Queue <T>::push_back(const T &value){
 }
 
 
-template <class T> T& Queue <T>::pop_front(){
+template <class T> T Queue <T>::pop_front(){
 
     Node <T> *curr_head = this->head;
     
@@ -179,7 +212,7 @@ template <class T> const T& Queue <T>::front() const {
 }
 
 
-template <class T> bool Queue <T>::empty(){
+template <class T> bool Queue <T>::empty() const {
     
     return this->head == NULL and this->end == NULL;
 
