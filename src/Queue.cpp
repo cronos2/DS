@@ -45,7 +45,7 @@ template <class T> Queue <T>::Queue(const T &value){
     
     Node <T> *node = new Node <T>(value, NULL);
 
-    this->head = this->last = node;
+    this->head = this->end = node;
 
 }
 
@@ -194,13 +194,6 @@ template <class T> T Queue <T>::pop_front(){
     }
 
     return value;
-
-}
-
-
-template <class T> T& Queue <T>::front(){
-
-    return this->head->getValue();
 
 }
 

@@ -26,22 +26,12 @@ template <class T> class Node {
           *
           * @brief Constructor de la clase
           * @param value Valor que va a almacenar el nodo
-          * @return Un nodo almacenando el valor value (apunta a NULL)
-          *
-          */
-
-        Node(T value);
-
-        /**
-          *
-          * @brief Constructor de la clase
-          * @param value Valor que va a almacenar el nodo
-          * @param next Puntero al siguiente nodo de la lista
+          * @param next Puntero al siguiente nodo de la lista (NULL por defecto)
           * @return Un nodo almacenando el valor value.
           *
           */
 
-        Node(T value, Node <T> *next);
+        Node(const T &value, Node <T> *next);
 
         /**
           *
@@ -76,7 +66,7 @@ template <class T> class Node {
           *
           */
 
-        T getValue() const {
+        const T& getValue() const {
 
             return this->value;
 

@@ -42,7 +42,7 @@ template <class T> class List {
           *
           */
 
-        List(T value);
+        List(const T &value);
 
         /**
           *

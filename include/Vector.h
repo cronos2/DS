@@ -156,7 +156,7 @@ template <class T> class Vector {
           *
           */
 
-        void push_back(const T& value);
+        void push_back(const T &value);
 
         /**
           *

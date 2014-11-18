@@ -97,8 +97,6 @@ template <class T> class Queue {
           *
           */
 
-        T& front();
-
         const T& front() const;
 
         /**

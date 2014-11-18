@@ -39,7 +39,7 @@ template <class T> List <T>::List(){
 }
 
 
-template <class T> List <T>::List(T value){
+template <class T> List <T>::List(const T &value){
     
     Node <T> *node = new Node <T>(value);
 

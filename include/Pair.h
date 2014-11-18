@@ -40,7 +40,7 @@ template <class T> class Pair {
           *
           */
 
-        T fst(){
+        const T& fst() const {
 
           return this->first;
 
@@ -53,7 +53,7 @@ template <class T> class Pair {
           *
           */
 
-        T snd(){
+        const T& snd() const {
 
           return this->second;
 

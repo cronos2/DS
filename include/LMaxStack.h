@@ -43,34 +43,6 @@ template <class T> class LMaxStack {
 
         /**
           *
-          * @brief Constructor de copia de la clase
-          * @param other instancia de la clase que queremos copiar
-          * @return Una copia profunda de other
-          *
-          */
-
-        // LMaxStack(const LMaxStack &other);
-
-        /**
-          *
-          * @brief Operador de asignación de la clase
-          * @param other instancia de la clase a la que queremos asignar this
-          * @return *this
-          *
-          */
-
-        // List <T>& operator=(const LMaxStack &other);
-
-        /**
-          *
-          * @brief Destructor de la clase
-          *
-          */
-
-        // ~LMaxStack();
-
-        /**
-          *
           * @pre El tipo T debe tener sobrecargado el operador <
           * @brief Añade un elemento a la pila
           * @param value valor que vamos a añadir

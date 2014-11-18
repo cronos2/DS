@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <QMaxStack.h>
+#include <LMaxStack.h>
 #include <Vector.h>
 #include <Pair.h>
 
@@ -9,7 +9,7 @@ using namespace std;
 
 int main(){
 
-    QMaxStack <int> stack;
+    LMaxStack <int> stack;
 
     for(int i = 0; i < 5; i++){
 
@@ -19,7 +19,7 @@ int main(){
 
     cout << stack.pop() << endl;
 
-    QMaxStack <int> stack2(stack);
+    LMaxStack <int> stack2(stack);
 
     stack2.push(100);
 

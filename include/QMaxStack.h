@@ -21,7 +21,7 @@ template <class T> class QMaxStack {
     
     private:
 
-        Queue < Pair <T> > Q1, Q2;
+        Queue < Pair <T> > queue;
 
     public:
 

@@ -8,20 +8,18 @@ using namespace std;
 
 template <class T> QMaxStack <T>::QMaxStack(){
     
-    Queue < Pair <T> > Q1, Q2;
+    Queue < Pair <T> > queue;
 
-    this->Q1 = Q1;
-    this->Q2 = Q2;
+    this->queue = queue;
 
 }
 
 
 template <class T> QMaxStack <T>::QMaxStack(const T &value){
     
-    Queue < Pair <T> > queue(value), Q2;
+    Queue < Pair <T> > queue(value);
 
-    this->Q1 = queue;
-    this->Q2 = Q2;
+    this->queue = queue;
 
 }
 
@@ -29,71 +27,42 @@ template <class T> QMaxStack <T>::QMaxStack(const T &value){
 template <class T> void QMaxStack <T>::push(const T &value){
 
     T curr_max = this->empty() ? value : this->getMax();
-
+    
     Pair <T> pair(value, curr_max < value ? value : curr_max);
+    
+    Queue < Pair <T> > aux_queue(pair);
 
-    this->Q1.push_back(pair);
+    while(not this->queue.empty()){
+
+        pair = this->queue.pop_front();
+        aux_queue.push_back(pair);
+
+    }
+
+    this->queue = aux_queue;
 
 }
 
 
 template <class T> T QMaxStack <T>::pop(){
-    
-    Pair <T> pair;
 
-    while(true){
-
-        pair = this->Q1.pop_front();
-
-        if(this->Q1.empty()){
-
-            Queue < Pair <T> > new_queue;
-            
-            this->Q1 = this->Q2;
-            this->Q2 = new_queue;
-
-            return pair.fst();
-
-        } else {
-
-            this->Q2.push_back(pair);
-
-        }
-
-    }
+    return this->queue.pop_front().fst();
 
 }
 
 
 template <class T> T QMaxStack <T>::getMax(){
     
-    Pair <T> pair;
+    const Pair <T> &pair = this->queue.front();
 
-    while(true){
-
-        pair = this->Q1.pop_front();
-
-        this->Q2.push_back(pair);
-
-        if(this->Q1.empty()){
-
-            Queue < Pair <T> > new_queue;
-            
-            this->Q1 = this->Q2;
-            this->Q2 = new_queue;
-
-            return pair.snd();
-
-        }
-
-    }
+    return pair.snd();
 
 }
 
 
 template <class T> bool QMaxStack <T>::empty() const {
     
-    return this->Q1.empty();
+    return this->queue.empty();
 
 }
 

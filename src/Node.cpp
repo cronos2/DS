@@ -6,15 +6,7 @@
 #include <Node.h>
 
 
-template <class T> Node <T>::Node(T value){
-
-    this->value = value;
-    this->next = NULL;
-
-}
-
-
-template <class T> Node <T>::Node(T value, Node <T> *next){
+template <class T> Node <T>::Node(const T &value, Node <T> *next = NULL){
 
     this->value = value;
     this->next = next;
