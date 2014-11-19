@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cp tests/$1.cpp src/main.cpp
+make clean > /dev/null && make /dev/null
+./bin/stack

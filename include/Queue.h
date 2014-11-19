@@ -106,8 +106,7 @@ template <class T> class Queue {
           *
           */
 
-        bool empty() const;
-                  
+        bool empty() const;                  
                     
 };
 

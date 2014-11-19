@@ -23,6 +23,8 @@ template <class T> class List {
 
         void clear(Node <T> *from);
 
+        Node <T>* back();
+
     public:
 
         /**
@@ -79,7 +81,7 @@ template <class T> class List {
           *
           */
 
-        void push(T value);
+        void push(const T &value);
 
         /**
           *
@@ -88,11 +90,12 @@ template <class T> class List {
           *
           */
 
-        void unshift(T value);
+        void unshift(const T &value);
 
         /**
           *
           * @brief Borra el último elemento de la lista y devuelve su valor
+          * @pre La lista no debe estar vacía
           * @return El valor del nodo
           *
           */
@@ -102,6 +105,7 @@ template <class T> class List {
         /**
           *
           * @brief Borra el primer elemento de la lista y devuelve su valor
+          * @pre La lista no debe estar vacía
           * @return El valor del nodo
           *
           */

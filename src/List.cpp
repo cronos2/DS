@@ -29,6 +29,27 @@ template <class T> void List <T>::clear(Node <T> *from = NULL){
 }
 
 
+template <class T> Node <T>* List <T>::back(){
+
+    if(this->empty()){
+
+        return NULL;
+
+    }
+    
+    Node <T> *curr = this->head;
+
+    while(curr->getNext() != NULL){  // list is NOT empty
+
+        curr = curr->getNext();
+
+    }
+
+    return curr;
+
+}
+
+
 /* PUBLIC */
 
 
@@ -98,7 +119,7 @@ template <class T> List <T>& List <T>::operator=(const List <T> &other){
 
             if(this->empty()){
 
-                this->push(curr_other->getValue());
+                this->unshift(curr_other->getValue());
 
                 curr_other = curr_other->getNext();
                 curr_here = this->head;
@@ -143,11 +164,51 @@ template <class T> List <T>::~List(){
 }
 
 
-template <class T> void List <T>::unshift(T value){
+template <class T> void List <T>::push(const T &value){
+    
+    Node <T> *curr = this->head, new_node = new Node <T>(value);
+
+    if(curr == NULL){
+
+        this->head = new_node;
+
+    } else {
+
+        curr = this->back();
+
+        curr->setNext(new_node);
+
+    }
+
+}
+
+
+template <class T> void List <T>::unshift(const T &value){
     
     Node <T> *new_node = new Node <T>(value, this->head);
 
     this->head = new_node;
+
+}
+
+
+template <class T> T List <T>::pop(){
+    
+    Node <T> *last = this->back(), *curr = this->head;
+
+    while(curr->getNext() != last){  // list is NOT empty
+
+        curr = curr->getNext();
+
+    }
+
+    curr->setNext(NULL);
+
+    T value = last->getValue();
+
+    delete last;
+
+    return value;
 
 }
 
